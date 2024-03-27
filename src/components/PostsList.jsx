@@ -7,6 +7,12 @@ import classes from "./PostsList.module.css";
 
 function PostsList({ isPosting, onStopPosting }) {
 
+    const [posts, setPosts] = useState([]);
+
+    function addPostHandler(postData) {
+        setPosts((existingPosts) => [postData, ...existingPosts]);
+    } 
+
     let modalContent;
 
     if (isPosting) {
@@ -14,7 +20,7 @@ function PostsList({ isPosting, onStopPosting }) {
             <Modal onClose={onStopPosting}>
                 <NewPost
                     onCancel={onStopPosting}
-                />
+                    onAddPost={addPostHandler} />
             </Modal>
         )
     }
